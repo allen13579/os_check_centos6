@@ -50,16 +50,18 @@ $(function(){
                         break;
                 }
             }
+
             if (index === $('#form').find('.input_bar[required]').length -1) {
                 $('.shadow').show(); // 打开loading
                 result = null;
                 $('.jsonData').html('');
                 $('#view').attr('class', 'disable-button'); // 图形化按钮禁用
                 $('#view').attr('disabled', true); // 图形化按钮禁用
+                /*发送请求*/
                 $.ajax({
                     type: 'POST',
                     dataType: 'json',
-                    url: 'https://www.geek-block.com/api/apistore/invoke/os_check_centos6',
+                    url: '',
                     data: $('#form').serialize(),
                     success: function (data) {
                         $('.shadow').hide(); // 关闭loading
@@ -72,7 +74,7 @@ $(function(){
                             $('#view').attr('disabled', true); // 图形化按钮禁用
                         }
                         result = JSON.stringify(data)
-                        $('.jsonData').html(result)
+                        $('.jsonData').html(result) // 渲染数据
                     },
                     error: function(data) {
                         $('.shadow').hide(); // 关闭loading
@@ -119,7 +121,8 @@ $(function(){
         const jf = new JsonFormater(options); //创建对象
         jf.doFormat(result); //格式化json
     })
-    $('#view').on('click', function () { // 数据可视化
+    /*数据可视化*/
+    $('#view').on('click', function () {
         $('.arr i:nth-child(1)').show(); // 箭头闪烁
         setTimeout(()=>{
             $('.arr i:nth-child(2)').show();
