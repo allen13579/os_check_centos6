@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>”运维API“应用示例</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="./css/jsonFormater.css">
+    <link rel="stylesheet" href="./css/common.css">
+</head>
+<body>
+<div class="main">
+    <div class="left_box">
+        <div class="shadow"></div>
+        <div class="form_contain">
+            <form id="form" class="form" method="post" novalidate>
+                <ul>
+                    <li>
+                        <h2>Linux主机巡检_centos6</h2>
+                        <span class="required_notification">* 表示必填项</span>
+                    </li>
+                    <li>
+                        <label>目标服务器ip:</label>
+                        <input name="host" type="text"  placeholder="192.168.0.0" class="input_bar" autocomplete="off" required/>
+                        <span class="form_hint"></span>
+                    </li>
+                    <li>
+                        <label>目标服务器用户名:</label>
+                        <input name="username" type="text" placeholder="root" class="input_bar" autocomplete="off" required/>
+                        <span class="form_hint"></span>
+                    </li>
+                    <li>
+                        <label>目标服务器密码:</label>
+                        <input name="password" type="password" placeholder="请输入密码" class="input_bar" autocomplete="off" required/>
+                        <span class="form_hint"></span>
+                    </li>
+                    <li>
+                        <label>ApiKey:</label>
+                        <input name="iApiKey" type="text" placeholder="请输入ApiKey" class="input_bar" autocomplete="off" required/>
+                        <span class="form_hint"></span>
+                    </li>
+                    <li>
+                        <label>目标服务器端口:</label>
+                        <input name="port" type="text" placeholder="请输入端口号" class="input_bar" autocomplete="off" required value="22"/>
+                        <span class="form_hint"></span>
+                    </li>
+                    <li>
+                        <label>超时时间（毫秒）:</label>
+                        <input name="timeout" type="text" placeholder="请输入超时时间" class="input_bar" autocomplete="off" required value="600000"/>
+                        <span class="form_hint"></span>
+                    </li>
+                    <li>
+                        <label>轮询间隔（毫秒）:</label>
+                        <input name="rate" type="text" placeholder="请输入轮询间隔" class="input_bar" autocomplete="off" required value="10000"/>
+                        <span class="form_hint"></span>
+                    </li>
+                    <li>
+                        <button id="submit" class="able-button" type="submit">发送</button>
+                        <button id="reset" class="able-button" type="submit">重置</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="data">
+            <div id="jsonData" class="jsonData"></div>
+            <div class="oprate">
+                <button id="jsonF" class="able-button" type="submit">格式化</button>
+                <button id="view" class="disable-button" type="submit" disabled="true">可视化</button>
+            </div>
+        </div>
+    </div>
+    <div class="center_box">
+        <div class="arr"><i></i><i></i><i></i></div>
+    </div>
+    <div class="right_box">
+        <div class="right_box_top">
+            <div id="right_box_top_left" class="right_box_top_left"></div>
+            <div id="right_box_top_right" class="right_box_top_right"></div>
+        </div>
+        <div id="right_box_bottom" class="right_box_bottom"></div>
+    </div>
+</div>
+
+<script src="./lib/jquery-3.4.1.min.js"></script>
+<script src="./lib/cursor-effects.js"></script>
+<script src="./lib/jsonFormater.js"></script>
+<script src="./lib/echarts.min.js"></script>
+<script src="./js/common.js"></script>
+</body>
+</html>
