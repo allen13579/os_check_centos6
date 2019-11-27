@@ -5,6 +5,7 @@ $(function(){
         e.preventDefault();
     });
     const host_v = /(?=(\b|\D))(((\d{1,2})|(1\d{1,2})|(2[0-4]\d)|(25[0-5]))\.){3}((\d{1,2})|(1\d{1,2})|(2[0-4]\d)|(25[0-5]))(?=(\b|\D))/; // ip地址
+    /*表单验证*/
     $('.input_bar[required]').on({
         focus: function () {
             $(this).siblings('.form_hint').hide(); // 隐藏提示
@@ -30,6 +31,7 @@ $(function(){
             }
         }
     })
+    /*发送请求*/
     $('#submit').on('click', function() {
         $('#form').find('.input_bar[required]').each(function (index, obj) {
             if (!$(this).val()) { // 值为空
@@ -61,17 +63,15 @@ $(function(){
                 $.ajax({
                     type: 'POST',
                     dataType: 'json',
-                    url: '',
+                    url: 'http://localhost:18008/script/scriptToAPI/os_check_centos6',
                     data: $('#form').serialize(),
                     success: function (data) {
                         $('.shadow').hide(); // 关闭loading
                         $('.data').show() // 数据展示
                         if (data.code === 600000) { // 得到正确的数据
-                            $('#view').attr('class', 'able-button'); // 图形化按钮放开
-                            $('#view').attr('disabled', false); // 图形化按钮放开
+                            $('#view').attr('class', 'able-button').attr('disabled', false); // 图形化按钮放开
                         } else {
-                            $('#view').attr('class', 'disable-button'); // 图形化按钮禁用
-                            $('#view').attr('disabled', true); // 图形化按钮禁用
+                            $('#view').attr('class', 'disable-button').attr('disabled', true); // 图形化按钮禁用
                         }
                         result = JSON.stringify(data)
                         $('.jsonData').html(result) // 渲染数据
@@ -85,6 +85,7 @@ $(function(){
             }
         })
     })
+    /*表单重置*/
     $('#reset').on('click', function () {
         reset()
     })
@@ -113,7 +114,8 @@ $(function(){
             $(this).removeClass('inputValid')
         })
     }
-    $('#jsonF').on('click', function () { // 数据格式化
+    /*数据格式化*/
+    $('#jsonF').on('click', function () {
         const options = {
             quoteKeys: true,
             dom: '#jsonData' //对应容器的css选择器
@@ -134,6 +136,7 @@ $(function(){
             draw_1()
             draw_2()
             draw_3()
+            draw_4()
             // $('.arr i').hide();
         },2000)
     })
@@ -146,7 +149,7 @@ $(function(){
         const product = {
             legend: ['已用内存', '可用内存'], data: [{ value: UsedMemory, name: '已用内存' }, { value: freeMemory, name: '可用内存' }]
         }
-        const myChart = echarts.init(document.getElementById('right_box_top_left'));
+        const myChart = echarts.init(document.getElementById('right_box_center_left'));
         // 指定图表的配置项和数据
         const option = {
             title: {
@@ -208,7 +211,7 @@ $(function(){
         const product = {
             legend: ['僵尸进程', '正常进程'], data: [{ value: ZombieNumber, name: '僵尸进程' }, { value: NormalNumber, name: '正常进程' }]
         }
-        const myChart = echarts.init(document.getElementById('right_box_top_right'));
+        const myChart = echarts.init(document.getElementById('right_box_center_right'));
         // 指定图表的配置项和数据
         const option = {
             title: {
@@ -268,6 +271,10 @@ $(function(){
         const FilesystemWarning = parseInt(data.FilesystemWarning.Values[0].Value); // 文件系统空间告警
         const MessagesWarning = parseInt(data.MessagesWarning.Values[0].Value); // Messages告警数
         const NotAvailableLV = parseInt(data['Not-AvailableLV'].Values[0].Value); // 异常状态lv数
+        // const DmesgWarning = 1
+        // const FilesystemWarning = 5
+        // const MessagesWarning = 0
+        // const NotAvailableLV = 0
         const product = {xAxis: ['Dmesg告警数', '文件系统空间告警数', 'Messages告警数', '异常状态lv数'], series: [DmesgWarning, FilesystemWarning, MessagesWarning, NotAvailableLV]}
         const myChart = echarts.init(document.getElementById('right_box_bottom'));
         // 指定图表的配置项和数据
@@ -290,10 +297,10 @@ $(function(){
                 show: false
             },
             grid: {
-                top: '15%',
+                top: '20%',
                 left: '3%',
-                right: '4%',
-                bottom: '13%',
+                right: '2%',
+                bottom: '8%',
                 containLabel: true
             },
             color: ['#FF0000', '#01b2f3'],
@@ -334,8 +341,8 @@ $(function(){
                         }
                     },
                     axisLabel: {
-                        interval: 0,
-                        rotate: 10
+                        // interval: 0,
+                        rotate: 8
                     }
                 }
             ],
@@ -359,6 +366,7 @@ $(function(){
         myChart.setOption(option);
         let index = 0 // 播放所在下标
         setInterval(function() {
+            console.log('fdfdfdsfds')
             myChart.dispatchAction({
                 type: 'showTip',
                 seriesIndex: 0,
@@ -369,5 +377,20 @@ $(function(){
                 index = 0
             }
         }, 1000)
+    }
+    function draw_4() { // 其他信息
+        const data = JSON.parse(result).data
+        let item = ''
+        const OSType = {name: data.OSType.Note, value: data.OSType.Values[0].Value}; // 操作系统类型
+        item += '<p><span>' + OSType.name + ':</span><span>' + OSType.value + '</span></p>';
+        const OSVersion = {name: data.OSVersion.Note, value: data.OSVersion.Values[0].Value}; // 操作系统版本
+        item += '<p><span>' + OSVersion.name + ':</span><span>' + OSVersion.value + '</span></p>';
+        const MachineTime = {name: data.MachineTime.Note, value: data.MachineTime.Values[0].Value}; // 操作系统时间
+        item += '<p><span>' + MachineTime.name + ':</span><span>' + MachineTime.value + '</span></p>';
+        const OSLoad = {name: data.OSLoad.Note, value: data.OSLoad.Values[0].Value}; // 系统负载【15分钟负载】
+        item += '<p><span>' + OSLoad.name + ':</span><span>' + OSLoad.value + '</span></p>';
+        const RunningTime = {name: data.RunningTime.Note, value: data.RunningTime.Values[0].Value + data.RunningTime.Unit}; // 运行时长
+        item += '<p><span>' + RunningTime.name + ':</span><span>' + RunningTime.value + '</span></p>';
+        $('.right_box_top').append(item)
     }
 })

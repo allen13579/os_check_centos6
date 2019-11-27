@@ -33,16 +33,17 @@ body{
     display: none;
 }
 .shadow{
-    height: 500px;
+    height: 270px;
     width: 570px;
     background: rgba(0,0,0,.7) url("../images/rings.svg") no-repeat center center/ 30%;
     position: absolute;
-    top: 0;
+    top: 1px;
+    left: 1px;
     z-index: 999;
     display: none;
 }
 .form_contain{
-    height: 500px;
+    height: 270px;
     width: 570px;
     border: 1px solid #000000;
 }
@@ -56,7 +57,7 @@ body{
     border-bottom:1px solid #eee;
     position:relative;
 }
-.form li:first-child, .form li:last-child {
+.form li:first-child{
     border-bottom:1px solid #777;
 }
 .form h2 {
@@ -156,14 +157,14 @@ button {
 }
 /**/
 .data{
-    height: 150px;
+    height: 380px;
     width: 570px;
     border:1px solid #777;
     display: none;
 }
 .jsonData{
     float: left;
-    height: 150px;
+    height: 380px;
     width: 480px;
     overflow-y: scroll;
 }
@@ -204,22 +205,35 @@ button {
 }
 /**/
 .right_box_top{
-    height: 325px;
+    height: 125px;
+    width: 600px;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    padding: 10px 0px 0px 10px;
+}
+.right_box_top p{
+    margin-bottom: 3px;
+}
+.right_box_top span:first-child{
+    margin-right: 20px
+}
+.right_box_center{
+    height: 295px;
     width: 600px;
 }
-.right_box_top_left{
-    height: 325px;
+.right_box_center_left{
+    height: 295px;
     width: 300px;
     border-right: 1px solid #fff;
     float: left;
 }
-.right_box_top_right{
-    height: 325px;
+.right_box_center_right{
+    height: 295px;
     width: 299px;
     float: left;
 }
 .right_box_bottom{
-    height: 325px;
+    height: 230px;
     width: 600px;
     border-top: 1px solid #fff;
 }

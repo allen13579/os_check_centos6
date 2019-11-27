@@ -38,17 +38,17 @@
                         <!--<input name="iApiKey" type="text" placeholder="请输入ApiKey" class="input_bar" autocomplete="off" required/>-->
                         <!--<span class="form_hint"></span>-->
                     <!--</li>-->
-                    <li>
+                    <li hidden>
                         <label>目标服务器端口:</label>
                         <input name="port" type="text" placeholder="请输入端口号" class="input_bar" autocomplete="off" required value="22"/>
                         <span class="form_hint"></span>
                     </li>
-                    <li>
+                    <li hidden>
                         <label>超时时间（毫秒）:</label>
                         <input name="timeout" type="text" placeholder="请输入超时时间" class="input_bar" autocomplete="off" required value="600000"/>
                         <span class="form_hint"></span>
                     </li>
-                    <li>
+                    <li hidden>
                         <label>轮询间隔（毫秒）:</label>
                         <input name="rate" type="text" placeholder="请输入轮询间隔" class="input_bar" autocomplete="off" required value="10000"/>
                         <span class="form_hint"></span>
@@ -72,9 +72,10 @@
         <div class="arr"><i></i><i></i><i></i></div>
     </div>
     <div class="right_box">
-        <div class="right_box_top">
-            <div id="right_box_top_left" class="right_box_top_left"></div>
-            <div id="right_box_top_right" class="right_box_top_right"></div>
+        <div class="right_box_top"></div>
+        <div class="right_box_center">
+            <div id="right_box_center_left" class="right_box_center_left"></div>
+            <div id="right_box_center_right" class="right_box_center_right"></div>
         </div>
         <div id="right_box_bottom" class="right_box_bottom"></div>
     </div>
