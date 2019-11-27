@@ -63,7 +63,7 @@ $(function(){
                 $.ajax({
                     type: 'POST',
                     dataType: 'json',
-                    url: 'http://localhost:18008/script/scriptToAPI/os_check_centos6',
+                    url: 'http://192.168.18.70:18008/script/scriptToAPI/os_check_centos6',
                     data: $('#form').serialize(),
                     success: function (data) {
                         $('.shadow').hide(); // 关闭loading
